@@ -53,8 +53,8 @@ def generate_launch_description():
     
     baxter_share = get_package_share_directory("baxter_moveit_config")
     gui_config_path = os.path.join(baxter_share, "config", "gazebo_gui.config")
-    # world_path = os.path.join(baxter_share, "worlds", "my_world.sdf")
-    world_path = os.path.join(baxter_share, "worlds", "world_with_desk.sdf")
+    empty_world = True
+    world_path = "empty.sdf" if empty_world else os.path.join(baxter_share, "worlds", "world_with_desk.sdf")
     gazebo = IncludeLaunchDescription( #ignition
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory("ros_gz_sim"), "launch"), "/gz_sim.launch.py"]),
@@ -62,8 +62,8 @@ def generate_launch_description():
                     # ("gz_args", [" -v 4 -r empty.sdf "] 
                     # ("gz_args", [f" -v 4 -r {world_path} "] 
                     # ("gz_args", [f" -v 4 empty.sdf --gui-config {gui_config_path} "] 
-                    ("gz_args", [f" -v 4 -r empty.sdf --gui-config {gui_config_path} "] 
-                    # ("gz_args", [f" -v 4 -r {world_path} --gui-config {gui_config_path} "] 
+                    # ("gz_args", [f" -v 4 -r empty.sdf --gui-config {gui_config_path} "] 
+                    ("gz_args", [f" -v 4 -r {world_path} --gui-config {gui_config_path} "] 
                     )
                 ]
             )
